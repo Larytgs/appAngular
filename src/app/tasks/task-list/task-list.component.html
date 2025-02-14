@@ -4,7 +4,35 @@
 <button type="button" class="btn btn-primary mb-3 ms-5" [routerLink]="['/new']">
 Nova tarefa
 </button>
-
 <!--class do Bootstrap
     colocando ele para ir na rota new, clicando no botao
 -->
+
+<section>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let task of tasks">
+
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input"/>
+      </div>
+
+      <!--descrição da tardefa, que vai exibir no html-->
+      <div [innerHTML]="task.description" class="task-item-description"
+      [ngClass]="task.completed ? 'task-completed' : '' ">
+        <!--se minha tardefa ta completa, entao coloca essa classe la, se nao coloca nada-->
+      </div>
+
+      <div >
+        <button type="button" [routerLink]="['/edit', task.id]" class="btn btn-primary mr-1">
+          Alterar
+        </button>
+      </div>
+
+      <div>
+        <button type="button" class="btn btn-danger">
+          Excluir
+        </button>
+      </div>
+    </li>
+  </ul>
+</section>

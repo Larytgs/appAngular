@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TaskService {
-  Tasks: Task[] = [
+  Tasks: Task[] = [ //importar o array de tarefas
     {id: 1, description: 'Tarefa 1', completed: false},
     {id: 2, description: 'Tarefa 2', completed: false},
     {id: 3, description: 'Tarefa 3', completed: false},
