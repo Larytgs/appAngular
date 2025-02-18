@@ -8,12 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  Tasks: Task[] = [] //importar o array de tarefas
+  tasks: Task[] = [] //importar o array de tarefas
 
   constructor(private taskService: TaskService) {}
   //vou receber um construtor da classe taskService
 
   ngOnInit() { //tem que implementar o método ng ou init
-    this.Tasks = this.taskService.getAll();
+    this.tasks = this.taskService.getAll();
   }//quando o componente iniciar, ele vai la no service que esta cadastrado
 }

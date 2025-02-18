@@ -1,37 +1,31 @@
-<h2 class="mt-5 ms-5  shadow-lg p-2 mb-5" style="width: 200px;">Tarefas</h2>
+<h1 class="mt-5 ms-5  shadow-lg p-2 mb-5" style="width: 200px;">Tarefa</h1>
 <hr />
-
-<button type="button" class="btn btn-primary mb-3 ms-5" [routerLink]="['/new']">
-Nova tarefa
-</button>
 <!--class do Bootstrap
     colocando ele para ir na rota new, clicando no botao
 -->
+<button type="button" class="btn btn-primary bg-primary mb-2" [routerLink]="['/new']">
+  Nova Tarefa
+</button>
 
 <section>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let task of tasks">
-
+    <li class="list-group-item task-item" *ngFor="let task of tasks">
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input"/>
+        <input type="checkbox" class="form-check-input" />
       </div>
 
-      <!--descrição da tardefa, que vai exibir no html-->
       <div [innerHTML]="task.description" class="task-item-description"
       [ngClass]="task.completed ? 'task-completed' : '' ">
-        <!--se minha tardefa ta completa, entao coloca essa classe la, se nao coloca nada-->
-      </div>
+      <!-- Interpolation -->
 
-      <div >
-        <button type="button" [routerLink]="['/edit', task.id]" class="btn btn-primary mr-1">
-          Alterar
-        </button>
       </div>
 
       <div>
-        <button type="button" class="btn btn-danger">
-          Excluir
-        </button>
+      <button type="button" [routerLink]="['/edit', task.id]" class="btn btn-primary mr-1">Alterar</button>
+      </div>
+
+      <div>
+      <button type="button" id="button-1"  class="btn btn-danger mt-2">Excluir</button>
       </div>
     </li>
   </ul>
