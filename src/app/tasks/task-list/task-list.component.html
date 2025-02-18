@@ -1,4 +1,4 @@
-<h1 class="mt-5 ms-5  shadow-lg p-2 mb-5" style="width: 200px;">Tarefa</h1>
+<h1 class="mt-5 ms-5  p-2 mb-3" style="width: 200px;">Tarefa</h1>
 <hr />
 <!--class do Bootstrap
     colocando ele para ir na rota new, clicando no botao
@@ -8,25 +8,14 @@
 </button>
 
 <section>
+  <div *ngIf="tasks.length == 0" class="alert alert-warning" role="alert"> <!--só um alerta-->
+    Nenhuma tarefa foi encontrada ainda.
+  </div>
+
+
   <ul class="list-group">
-    <li class="list-group-item task-item" *ngFor="let task of tasks">
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" />
-      </div>
-
-      <div [innerHTML]="task.description" class="task-item-description"
-      [ngClass]="task.completed ? 'task-completed' : '' ">
-      <!-- Interpolation -->
-
-      </div>
-
-      <div>
-      <button type="button" [routerLink]="['/edit', task.id]" class="btn btn-primary mr-1">Alterar</button>
-      </div>
-
-      <div>
-      <button type="button" id="button-1"  class="btn btn-danger mt-2">Excluir</button>
-      </div>
+    <li class="list-group-item" *ngFor="let task of tasks">
+        <app-task-list-item [task]="task" class="task-item"></app-task-list-item>
     </li>
   </ul>
 </section>
