@@ -22,8 +22,8 @@ export class TaskService {
   constructor() { }
 
 
-  getAll() {
-    const list = window.localStorage.getItem('lista-tarefas');
+  getAll() { //para pegar todas as tarefas
+    const list = window.localStorage.getItem('lista.tarefas');
     if (list) { //se list tem alguma coisa
       this.tasks = JSON.parse(list); //ele te devolve na tela
     }
