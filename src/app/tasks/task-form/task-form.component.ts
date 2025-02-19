@@ -1,6 +1,6 @@
+import { Task } from './../shared/task';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Task } from '../shared/task';
 import { TaskService } from '../shared/task.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { TaskService } from '../shared/task.service';
 })
 
 export class TaskFormComponent implements OnInit {
-  task: Task | undefined; //vou ter uma tarfa, o que vou usar na tela
+  task: Task = new Task(); //vou ter uma tarefa, o que vou usar na tela
   title: string = 'Nova tarefa';
 
   constructor(
@@ -22,13 +22,14 @@ export class TaskFormComponent implements OnInit {
   ngOnInit() { //ele tem que identificar se é uma edição ou uma inclusao
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) { //se tem id
-      this.task = this.taskService.getByID(parseInt(id)); //vai no servise recuperar a tarefa, passando pra int
+      this.task = this.taskService.getByID(parseInt(id)) ?? new Task(); //vai no servise recuperar a tarefa, passando pra int
+      // ?? new Task(); se getByID retornar undefined, será atribuído um novo objeto Task(), evitando o erro.
       this.title = 'Alterando tarefa'
     }
   }
 
   onSubmit(){
-    this.taskService.save(this.task);
-    this.router.navigate(['']);
+    this.taskService.save(this.task); //para salvar
+    this.router.navigate(['']); //redirecionar para listagem
   }
 }
