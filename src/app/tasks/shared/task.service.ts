@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 
 export class TaskService {
   tasks: Task[] = [ //importar o array de tarefas
-    {id: 1, description: 'Tarefa 1', completed: true},
+    /*{id: 1, description: 'Tarefa 1', completed: true},
     {id: 2, description: 'Tarefa 2', completed: false},
     {id: 3, description: 'Tarefa 3', completed: false},
     {id: 4, description: 'Tarefa 4', completed: true},
@@ -16,13 +16,17 @@ export class TaskService {
     {id: 7, description: 'Tarefa 7', completed: false},
     {id: 8, description: 'Tarefa 8', completed: false},
     {id: 9, description: 'Tarefa 9', completed: false},
-    {id: 10, description: 'Tarefa 10', completed: false},
+    {id: 10, description: 'Tarefa 10', completed: false},*/
   ];
 
   constructor() { }
 
 
   getAll() {
+    const list = window.localStorage.getItem('lista-tarefas');
+    if (list) { //se list tem alguma coisa
+      this.tasks = JSON.parse(list); //ele te devolve na tela
+    }
     return this.tasks;
   }
 
@@ -40,16 +44,25 @@ export class TaskService {
       }
     }
      else { //caso nao tenha id, ele entende q é uma conclusao
-      const lastId = this.tasks[this.tasks.length-1].id; //ele vai gerar um id, indo na ultima tarefa cadastrada
+      let lastId = 0;
+      if (this.tasks.length > 0) { //se eu tenho algo nesse array
+        lastId = this.tasks[this.tasks.length-1].id; //ele vai gerar um id, indo na ultima tarefa cadastrada
+      }
+      //se nao ele ..
       task.id = lastId + 1; //gera um novo ID
       task.completed = false; //marca como não completada
       this.tasks.push(task); //adiciona a nova tarefa ao array
     }
+
+    window.localStorage.setItem('lista.tarefas', JSON.stringify(this.tasks));
+    //toda vez que salvar uma tarefa ele salva no localStorage
   }
 
   delete(id: number) {
     const taskIndex = this.tasks.findIndex((value) => value.id == id); //recuperando o index da tarefa
     this.tasks.splice(taskIndex, 1); //chamando o metodo splice, para remover
+
+    window.localStorage.setItem('lista.tarefas', JSON.stringify(this.tasks)); //sempre que eu tenho que deletar uma tarefa, ele vem aqui e salva no localStorage
   }
 
 
